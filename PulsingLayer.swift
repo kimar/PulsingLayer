@@ -69,26 +69,29 @@ class PulsingLayer: CALayer {
     
     private func setupAnimationGroup() {
         let defaultCurve = CAMediaTimingFunction(name: kCAMediaTimingFunctionDefault)
-        
         self.animationGroup = CAAnimationGroup() as CAAnimationGroup
         self.animationGroup.duration = self.animationDuration + self.pulseInterval
         self.animationGroup.repeatCount = Float.infinity
         self.animationGroup.removedOnCompletion = false
         self.animationGroup.timingFunction = defaultCurve
-        
+        self.animationGroup.animations = [scaleAnimation(), opacityAnimation()]
+    }
+    
+    private func scaleAnimation() -> CABasicAnimation {
         let scaleAnimation = CABasicAnimation(keyPath: "transform.scale.xy")
         scaleAnimation.fromValue = 0.0
         scaleAnimation.toValue = 1.0
         scaleAnimation.duration = self.animationDuration
-        
+        return scaleAnimation
+    }
+    
+    private func opacityAnimation() -> CAKeyframeAnimation {
         let opacityAnimation = CAKeyframeAnimation(keyPath: "opacity")
         opacityAnimation.duration = self.animationDuration
         opacityAnimation.values = [0.45, 0.45, 0]
         opacityAnimation.keyTimes = [0, 0.2, 1]
         opacityAnimation.removedOnCompletion = false
-        
-        self.animationGroup.animations = [scaleAnimation, opacityAnimation]
-        
+        return opacityAnimation;
     }
     
 }
