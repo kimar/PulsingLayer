@@ -1,10 +1,10 @@
 # PulsingLayer
 
+[![Twitter: @Kidmar](https://img.shields.io/badge/contact-@Kidmar-blue.svg?style=flat)](https://twitter.com/Kidmar)
+
 Adds a customizable CALayer halo effect to any arbitrary UIView.
 
 Completely written in Swift.
-
-[![Twitter: @Kidmar](https://img.shields.io/badge/contact-@Kidmar-blue.svg?style=flat)](https://twitter.com/Kidmar)
 
 ![demo.gif](http://s.kida.io/pulsinglayer_demo.gif)
 
