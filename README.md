@@ -6,6 +6,8 @@ Adds a customizable CALayer halo effect to any arbitrary UIView.
 
 Completely written in Swift.
 
+![Screenshot from Himbo.app](http://a5.mzstatic.com/us/r30/Purple3/v4/70/53/b0/7053b0f0-12e1-db68-cd26-8dfbfd75a587/screen696x696.jpeg)
+
 ## How to use
 
 ```swift
