@@ -6,8 +6,6 @@ Adds a customizable CALayer halo effect to any arbitrary UIView.
 
 Completely written in Swift.
 
-![demo.gif](http://s.kida.io/pulsinglayer_demo.gif)
-
 ## How to use
 
 ```swift
