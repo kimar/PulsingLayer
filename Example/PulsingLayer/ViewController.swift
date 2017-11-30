@@ -14,10 +14,10 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        let layer = PulsingLayer(pulseColor: UIColor.redColor())
+        let layer = PulsingLayer(pulseColor: .red)
         layer.animationDuration = 0.8
         layer.pulseInterval = 0.3
-        layer.position = CGPointMake(CGRectGetWidth(self.view.frame)/2, CGRectGetHeight(self.view.frame)/2)
+        layer.position = CGPoint(x: view.frame.width/2, y: view.frame.height/2)
         self.view.layer.addSublayer(layer)
     }
 

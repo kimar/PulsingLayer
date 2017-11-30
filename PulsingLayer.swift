@@ -14,15 +14,15 @@ class PulsingLayer: CALayer {
     
     var radius: CGFloat {
         set(r) {
-            self.setupRadius(r)
+            setupRadius(radius: r)
         }
         get {
-            return self.cornerRadius
+            return cornerRadius
         }
     }
     
-    var animationDuration: NSTimeInterval = 10.0
-    var pulseInterval: NSTimeInterval = 3.0
+    var animationDuration: TimeInterval = 10.0
+    var pulseInterval: TimeInterval = 3.0
     var pulseColor: UIColor = UIColor(red: 0.0, green: 0.478, blue: 1.0, alpha: 1.0)
     
     private var animationGroup: CAAnimationGroup!
@@ -30,26 +30,26 @@ class PulsingLayer: CALayer {
     override init() {
         super.init()
         
-        self.contentsScale = UIScreen.mainScreen().scale
+        self.contentsScale = UIScreen.main.scale
         self.opacity = 0
         
         self.radius = 60.0
-        self.backgroundColor = pulseColor.CGColor
-        
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
+        self.backgroundColor = pulseColor.cgColor
+
+        DispatchQueue.global().async {
             self.setupAnimationGroup()
             if self.pulseInterval != Double.infinity {
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    self.addAnimation(self.animationGroup, forKey: "pulse")
-                })
+                DispatchQueue.main.async {
+                    self.add(self.animationGroup, forKey: "pulse")
+                }
             }
-        })
-    }
+        }
+    }	
 
     convenience init(pulseColor: UIColor) {
         self.init()
         self.pulseColor = pulseColor
-        self.backgroundColor = self.pulseColor.CGColor
+        self.backgroundColor = self.pulseColor.cgColor
     }
 
     required init(coder aDecoder: NSCoder) {
@@ -61,7 +61,7 @@ class PulsingLayer: CALayer {
         let tempPos = self.position
         let diameter = radius * 2
         
-        self.bounds = CGRectMake(0, 0, diameter, diameter)
+        self.bounds = CGRect(x: 0, y: 0, width: diameter, height: diameter)
         self.cornerRadius = radius
         self.position = tempPos
     }
@@ -72,7 +72,7 @@ class PulsingLayer: CALayer {
         self.animationGroup = CAAnimationGroup() as CAAnimationGroup
         self.animationGroup.duration = self.animationDuration + self.pulseInterval
         self.animationGroup.repeatCount = Float.infinity
-        self.animationGroup.removedOnCompletion = false
+        self.animationGroup.isRemovedOnCompletion = false
         self.animationGroup.timingFunction = defaultCurve
         self.animationGroup.animations = [scaleAnimation(), opacityAnimation()]
     }
@@ -90,7 +90,7 @@ class PulsingLayer: CALayer {
         opacityAnimation.duration = self.animationDuration
         opacityAnimation.values = [0.45, 0.45, 0]
         opacityAnimation.keyTimes = [0, 0.2, 1]
-        opacityAnimation.removedOnCompletion = false
+        opacityAnimation.isRemovedOnCompletion = false
         return opacityAnimation;
     }
     
